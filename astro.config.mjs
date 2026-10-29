@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import cloudflare from '@astrojs/cloudflare';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://dulceesencia.cl',
   server: {
@@ -11,4 +11,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // 👇 Forzamos la optimización en tiempo de compilación
+  adapter: cloudflare({ imageService: 'compile' }),
 });
