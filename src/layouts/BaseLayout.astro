@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Dulce Esencia | Pan de Pascua Casero en Santiago",
+  description = "Descubre Dulce Esencia, pan de Pascua casero con esencia natural preparada artesanalmente. Consulta y coordina tu pedido por WhatsApp en Santiago.",
+  image = "/images/hero_pan_de_pascua.jpg",
+} = Astro.props;
+
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es-CL" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {Astro.site && <link rel="canonical" href={canonicalURL} />}
+
+    <!-- SEO Primario -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="pan de pascua casero, dulce esencia, pan de pascua artesanal santiago, navidad chile, esencia natural pan de pascua" />
+    <meta name="author" content="Dulce Esencia" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="Dulce Esencia" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Google Fonts: Cormorant Garamond & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        "name": "Dulce Esencia",
+        "description": "Pan de Pascua casero con esencia natural preparada artesanalmente en Santiago de Chile.",
+        "telephone": "+56950075329",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressRegion": "Región Metropolitana",
+          "addressCountry": "CL"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Santiago"
+        },
+        "paymentAccepted": "Coordinación directa por WhatsApp",
+        "currenciesAccepted": "CLP",
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Pan de Pascua Casero con Esencia Natural",
+            "description": "Elaborado artesanalmente con esencia natural preparada por el elaborador, frutos secos y frutas confitadas."
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#FFF8EC] text-[#4A3028] antialiased selection:bg-[#7B2638] selection:text-[#FFF8EC] min-h-screen flex flex-col">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,55 @@
+---
+const features = [
+  {
+    title: 'Elaboración casera',
+    description: 'Cada pan de Pascua se prepara en tandas pequeñas, con la dedicación y el cuidado que caracterizan las recetas de hogar.',
+    accent: 'border-[#7B2638]/20 bg-[#FAF2E3]/80',
+    iconColor: 'text-[#7B2638]',
+  },
+  {
+    title: 'Esencia natural preparada artesanalmente',
+    description: 'Infusionamos y preparamos nuestra propia esencia de especias y frutas, logrando un aroma navideño auténtico sin aromatizantes sintéticos.',
+    accent: 'border-[#214A35]/20 bg-[#FAF2E3]/80',
+    iconColor: 'text-[#214A35]',
+  },
+  {
+    title: 'Pedidos directos y atención personalizada',
+    description: 'Coordinas tu encargo directamente con quien elabora los panes por WhatsApp, resolviendo dudas y coordinando entrega de forma cercana.',
+    accent: 'border-[#C9A45C]/30 bg-[#FAF2E3]/80',
+    iconColor: 'text-[#C9A45C]',
+  },
+];
+---
+
+<section class="py-14 md:py-20 bg-[#FAF2E3]/60 border-y border-[#C9A45C]/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-semibold tracking-wider uppercase text-[#7B2638]">
+        Diferenciadores
+      </span>
+      <h2 class="font-serif-display text-3xl sm:text-4xl text-[#4A3028] font-bold mt-2">
+        La diferencia de lo auténtico
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      {features.map((item) => (
+        <div class={`p-7 rounded-xl border ${item.accent} transition-all duration-200 hover:shadow-md flex flex-col justify-between`}>
+          <div>
+            <div class={`w-12 h-12 rounded-lg bg-[#FFF8EC] border border-[#C9A45C]/25 flex items-center justify-center mb-5 ${item.iconColor}`}>
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h3 class="font-serif-display text-xl sm:text-2xl font-bold text-[#4A3028] mb-3">
+              {item.title}
+            </h3>
+            <p class="text-sm text-[#4A3028]/80 leading-relaxed font-normal">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

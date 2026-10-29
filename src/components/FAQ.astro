@@ -1,0 +1,68 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { SITE_CONFIG } from '../config/site';
+
+const faqs = [
+  {
+    q: "¿Cómo puedo realizar un pedido?",
+    a: "Los pedidos se coordinan directamente por WhatsApp. Al escribirnos, te informaremos sobre los tamaños disponibles, las fechas estimadas de entrega o retiro en Santiago y coordinaremos tu encargo de manera personalizada.",
+    msg: SITE_CONFIG.messages.hero,
+    btn: "Coordinar pedido por WhatsApp",
+  },
+  {
+    q: "¿Dónde realizan las entregas?",
+    a: "La atención está orientada a Santiago de Chile; consulta la disponibilidad para tu sector al escribirnos por WhatsApp.",
+    msg: SITE_CONFIG.messages.faqDelivery,
+    btn: "Consultar cobertura en mi comuna",
+  },
+  {
+    q: "¿Qué presentaciones están disponibles?",
+    a: "Las presentaciones disponibles se confirman por WhatsApp al momento de tu consulta.",
+    msg: SITE_CONFIG.messages.gallery,
+    btn: "Consultar opciones de presentación",
+  },
+  {
+    q: "¿Cómo puedo consultar los ingredientes?",
+    a: "Para conocer los ingredientes específicos, consulta directamente con el elaborador por WhatsApp.",
+    msg: SITE_CONFIG.messages.faqIngredients,
+    btn: "Consultar ingredientes específicos",
+  },
+];
+---
+
+<section id="preguntas" class="py-16 md:py-24 bg-[#FFF8EC]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-semibold tracking-wider uppercase text-[#7B2638]">
+        Información Clara y Honesta
+      </span>
+      <h2 class="font-serif-display text-3xl sm:text-4xl text-[#4A3028] font-bold mt-2">
+        Preguntas frecuentes
+      </h2>
+      <p class="text-sm sm:text-base text-[#4A3028]/75 mt-3">
+        Todo lo que necesitas saber antes de coordinar tu encargo de pan de Pascua.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group rounded-xl border border-[#C9A45C]/30 bg-[#FAF2E3]/70 overflow-hidden" open={index === 0}>
+          <summary class="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B2638]">
+            <span class="font-serif-display text-lg sm:text-xl font-bold text-[#4A3028] pr-4">
+              {faq.q}
+            </span>
+            <svg class="w-5 h-5 text-[#7B2638] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </summary>
+          <div class="px-5 sm:px-6 pb-6 pt-1 text-sm sm:text-base text-[#4A3028]/85 leading-relaxed border-t border-[#C9A45C]/15">
+            <p class="mb-4">{faq.a}</p>
+            <WhatsAppButton message={faq.msg} variant="outline" size="sm" class="text-xs">
+              {faq.btn}
+            </WhatsAppButton>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

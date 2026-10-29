@@ -1,0 +1,55 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section id="esencia" class="py-16 md:py-24 bg-[#FFF8EC]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5 order-2 lg:order-1">
+        <div class="relative rounded-2xl overflow-hidden shadow-lg border border-[#C9A45C]/30 bg-[#FAF2E3]">
+          <img
+            src="/images/esencia_artesanal_preparacion.jpg"
+            alt="Preparación artesanal de infusión de especias naturales para pan de Pascua"
+            class="w-full h-[340px] sm:h-[400px] object-cover"
+            loading="lazy"
+          />
+          <div class="p-4 bg-[#FAF2E3] border-t border-[#C9A45C]/20 text-xs text-[#4A3028]/80 flex items-center justify-between">
+            <span class="font-medium text-[#7B2638]">Infusión propia de especias</span>
+            <span class="italic">Canela, clavo, anís y cítricos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 order-1 lg:order-2">
+        <div class="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#7B2638] mb-3">
+          <span>Nuestra Esencia</span>
+          <span aria-hidden="true" class="text-[#C9A45C]">·</span>
+          <span>Dedicación en Cada Detalle</span>
+        </div>
+
+        <h2 class="font-serif-display text-3xl sm:text-4xl lg:text-5xl text-[#4A3028] font-bold leading-tight mb-6 [text-wrap:balance]">
+          Una tradición que nace del cariño.
+        </h2>
+
+        <div class="space-y-4 text-base sm:text-lg text-[#4A3028]/85 leading-relaxed font-normal">
+          <p>
+            En <strong class="font-semibold text-[#7B2638]">Dulce Esencia</strong> creemos que los mejores sabores se disfrutan sin apuro. Preparamos nuestros panes de Pascua de manera casera, cuidando cada detalle y utilizando una esencia natural elaborada por nosotros.
+          </p>
+          <p>
+            A diferencia de las producciones industriales masivas, nuestro proceso comienza infusionando especias nobles a fuego suave, logrando un aroma profundo y una miga húmeda que evoca las Navidades de antaño en los hogares chilenos.
+          </p>
+          <p class="font-serif-display italic text-xl sm:text-2xl text-[#7B2638] pt-2">
+            “Un sabor pensado para compartir y disfrutar en familia.”
+          </p>
+        </div>
+
+        <div class="pt-8 mt-6 border-t border-[#C9A45C]/20">
+          <WhatsAppButton message={SITE_CONFIG.messages.essence} variant="outline" size="md">
+            Consultar sobre nuestra elaboración
+          </WhatsAppButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

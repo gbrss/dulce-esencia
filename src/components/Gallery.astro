@@ -1,0 +1,162 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { GALLERY_ITEMS } from '../data/gallery';
+---
+
+<section id="galeria" class="py-16 md:py-24 bg-[#FFF8EC]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#7B2638] mb-2">
+        <span>Galería Fotográfica</span>
+        <span aria-hidden="true" class="text-[#C9A45C]">·</span>
+        <span>Dulce Esencia</span>
+      </div>
+
+      <h2 class="font-serif-display text-3xl sm:text-4xl lg:text-5xl text-[#4A3028] font-bold [text-wrap:balance]">
+        Pequeños detalles, grandes momentos.
+      </h2>
+
+      <p class="text-sm sm:text-base text-[#4A3028]/75 mt-4">
+        Cada imagen refleja la dedicación artesanal, la calidad de nuestros ingredientes y la calidez de compartir una tradición en familia.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {GALLERY_ITEMS.map((item, idx) => (
+        <div class="group relative bg-[#FAF2E3] rounded-xl overflow-hidden border border-[#C9A45C]/25 shadow-xs flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+          <div
+            class="relative aspect-4/3 overflow-hidden cursor-pointer gallery-card"
+            data-index={idx}
+            data-title={item.title}
+            data-subtitle={item.subtitle}
+            data-desc={item.description}
+            data-img={item.imageSrc}
+            data-msg={item.whatsappMessage}
+            data-cat={item.category}
+          >
+            <img
+              src={item.imageSrc}
+              alt={item.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-[#4A3028]/0 group-hover:bg-[#4A3028]/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF8EC] text-[#4A3028] text-xs font-medium shadow-md">
+                Ver fotografía ampliada
+              </span>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-xs text-[#7B2638] font-medium block mb-1">{item.category}</span>
+              <h3 class="font-serif-display text-lg font-bold text-[#4A3028]">{item.title}</h3>
+              <p class="text-xs text-[#4A3028]/75 mt-1.5 line-clamp-2">{item.description}</p>
+            </div>
+            <div class="pt-4 mt-3 border-t border-[#C9A45C]/15">
+              <WhatsAppButton message={item.whatsappMessage} variant="outline" size="sm" class="w-full justify-center text-xs">
+                Consultar por WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 p-4 rounded-lg bg-[#FAF2E3]/80 border border-[#C9A45C]/25 text-center text-xs text-[#4A3028]/70 max-w-2xl mx-auto">
+      <p><strong class="text-[#7B2638]">Nota gastronómica:</strong> Fotografías de muestra gastronómica artesanal para Dulce Esencia. Presentaciones reales coordinadas directamente al encargar.</p>
+    </div>
+  </div>
+
+  {/* Modal Lightbox accesible */}
+  <div id="gallery-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-[#4A3028]/85 backdrop-blur-sm" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="relative bg-[#FFF8EC] rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-[#C9A45C]/40">
+      <button
+        type="button"
+        id="lightbox-close"
+        class="absolute top-4 right-4 z-10 p-2 rounded-full bg-[#FFF8EC]/90 text-[#4A3028] hover:bg-[#7B2638] hover:text-[#FFF8EC] transition-colors cursor-pointer"
+        aria-label="Cerrar modal"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="relative aspect-16/10 sm:aspect-16/9 bg-[#FAF2E3] overflow-hidden">
+        <img id="lightbox-img" src="" alt="" class="w-full h-full object-cover" />
+      </div>
+
+      <div class="p-6 sm:p-8">
+        <span id="lightbox-cat" class="text-xs font-semibold tracking-wider uppercase text-[#7B2638] block mb-1"></span>
+        <h3 id="lightbox-title" class="font-serif-display text-2xl sm:text-3xl font-bold text-[#4A3028] mb-2"></h3>
+        <p id="lightbox-subtitle" class="text-sm font-medium text-[#214A35] mb-4"></p>
+        <p id="lightbox-desc" class="text-sm sm:text-base text-[#4A3028]/85 leading-relaxed mb-6 font-normal"></p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#C9A45C]/25">
+          <span class="text-xs text-[#4A3028]/65">Presiona Escape o el botón para cerrar</span>
+          <a
+            id="lightbox-cta"
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-5 py-2.5 text-sm rounded-lg bg-[#214A35] text-[#FFF8EC] hover:bg-[#183928] font-medium transition-all shadow-sm"
+          >
+            Consultar sobre esta presentación
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const lightbox = document.getElementById('gallery-lightbox');
+  const closeBtn = document.getElementById('lightbox-close');
+  const img = document.getElementById('lightbox-img') as HTMLImageElement;
+  const title = document.getElementById('lightbox-title');
+  const subtitle = document.getElementById('lightbox-subtitle');
+  const desc = document.getElementById('lightbox-desc');
+  const cat = document.getElementById('lightbox-cat');
+  const cta = document.getElementById('lightbox-cta') as HTMLAnchorElement;
+
+  const openLightbox = (card: HTMLElement) => {
+    if (!lightbox || !img || !title || !subtitle || !desc || !cat || !cta) return;
+    img.src = card.dataset.img || '';
+    img.alt = card.dataset.title || '';
+    title.textContent = card.dataset.title || '';
+    subtitle.textContent = card.dataset.subtitle || '';
+    desc.textContent = card.dataset.desc || '';
+    cat.textContent = card.dataset.cat || '';
+    const msg = card.dataset.msg || '¡Hola! Quisiera consultar sobre esta opción.';
+    cta.href = `https://wa.me/56950075329?text=${encodeURIComponent(msg)}`;
+
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = 'unset';
+  };
+
+  document.querySelectorAll('.gallery-card').forEach((card) => {
+    card.addEventListener('click', () => openLightbox(card as HTMLElement));
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+      closeLightbox();
+    }
+  });
+</script>

@@ -1,0 +1,63 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section id="inicio" class="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-gradient-to-b from-[#FFF8EC] via-[#FFF8EC] to-[#FAF2E3]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      {/* Columna de Texto Editorial */}
+      <div class="lg:col-span-7 flex flex-col justify-center">
+        <div class="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-[#7B2638] mb-4">
+          <span>TRADICIÓN ARTESANAL</span>
+          <span aria-hidden="true" class="text-[#C9A45C]">·</span>
+          <span>SANTIAGO DE CHILE</span>
+        </div>
+
+        <h1 class="font-serif-display text-4xl sm:text-5xl lg:text-6xl text-[#4A3028] leading-[1.08] tracking-tight font-bold mb-6 [text-wrap:balance]">
+          El sabor de la Navidad, <span class="italic text-[#7B2638]">hecho en casa.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-[#4A3028]/85 leading-relaxed mb-8 max-w-xl font-normal">
+          Descubre nuestro pan de Pascua casero, elaborado artesanalmente y con una esencia natural preparada con dedicación y mucho amor.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+          <WhatsAppButton message={SITE_CONFIG.messages.hero} variant="primary" size="lg" class="w-full sm:w-auto">
+            Quiero encargar el mío
+          </WhatsAppButton>
+
+          <a href="#galeria" class="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium rounded-lg text-[#7B2638] border border-[#7B2638]/25 hover:bg-[#7B2638]/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B2638] text-center">
+            Descubrir nuestros panes
+          </a>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#4A3028]/70 pt-2 border-t border-[#C9A45C]/25">
+          <svg class="w-4 h-4 text-[#7B2638] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <span>Pedidos por encargo en Santiago.</span>
+        </div>
+      </div>
+
+      {/* Columna de Fotografía Gastronómica */}
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          <div class="relative rounded-2xl overflow-hidden shadow-xl border border-[#C9A45C]/30 bg-[#FAF2E3]">
+            <img
+              src="/images/hero_pan_de_pascua.jpg"
+              alt="Pan de Pascua casero artesanal dorado con frutos secos de Dulce Esencia"
+              class="w-full h-[360px] sm:h-[420px] lg:h-[460px] object-cover hover:scale-[1.02] transition-transform duration-500 ease-out"
+              loading="eager"
+            />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#4A3028]/85 via-[#4A3028]/40 to-transparent p-5 text-[#FFF8EC]">
+              <p class="text-xs uppercase tracking-wider text-[#C9A45C] font-medium">Receta Tradicional</p>
+              <p class="text-sm font-serif-display text-white italic">Corona dorada de nueces, almendras y esencia natural propia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

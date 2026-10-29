@@ -1,0 +1,52 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { SITE_CONFIG } from '../config/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[#4A3028] text-[#FFF8EC] pt-14 pb-12 border-t border-[#C9A45C]/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#FFF8EC]/15">
+      <div class="md:col-span-6 flex flex-col items-start">
+        <a href="#inicio" class="inline-block mb-4" aria-label="Dulce Esencia - Ir al inicio">
+          <img src="/logo-footer.svg" alt="Dulce Esencia - Pan de Pascua Casero" class="h-11 w-auto" width="280" height="64" />
+        </a>
+        <p class="text-sm text-[#FFF8EC]/80 max-w-sm leading-relaxed mb-4 font-normal">
+          Pan de Pascua casero elaborado artesanalmente con dedicación y una esencia natural propia en Santiago de Chile. Hecho para compartir en familia.
+        </p>
+        <span class="text-xs text-[#C9A45C]">{SITE_CONFIG.location}</span>
+      </div>
+
+      <div class="md:col-span-3">
+        <h4 class="font-serif-display text-lg font-bold text-[#FFF8EC] mb-4">Navegación</h4>
+        <ul class="space-y-2.5 text-sm">
+          {SITE_CONFIG.navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-[#FFF8EC]/75 hover:text-[#C9A45C] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="md:col-span-3 flex flex-col items-start">
+        <h4 class="font-serif-display text-lg font-bold text-[#FFF8EC] mb-4">Contacto</h4>
+        <p class="text-xs text-[#FFF8EC]/75 mb-4 leading-relaxed">
+          Atención directa por WhatsApp para consultar opciones, sectores y coordinar tu pedido.
+        </p>
+        <WhatsAppButton message={SITE_CONFIG.messages.default} variant="gold" size="sm">
+          Escribir por WhatsApp
+        </WhatsAppButton>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#FFF8EC]/60">
+      <p>© {currentYear} Dulce Esencia · Pan de Pascua Casero. Todos los derechos reservados.</p>
+      <a href="#inicio" class="text-xs text-[#C9A45C] hover:text-[#FFF8EC] transition-colors">
+        Volver al inicio ↑
+      </a>
+    </div>
+  </div>
+</footer>
