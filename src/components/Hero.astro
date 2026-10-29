@@ -3,61 +3,154 @@ import WhatsAppButton from './WhatsAppButton.astro';
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<section id="inicio" class="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-gradient-to-b from-[#FFF8EC] via-[#FFF8EC] to-[#FAF2E3]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-      {/* Columna de Texto Editorial */}
-      <div class="lg:col-span-7 flex flex-col justify-center">
-        <div class="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-[#7B2638] mb-4">
-          <span>TRADICIÓN ARTESANAL</span>
-          <span aria-hidden="true" class="text-[#C9A45C]">·</span>
-          <span>SANTIAGO DE CHILE</span>
+<section id="inicio" class="relative min-h-[90vh] flex items-center overflow-hidden bg-[#FFF8EC]">
+  <!-- Fondo decorativo con degradados suaves -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-[#C9A45C]/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#7B2638]/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      
+      <!-- Columna de Texto (Izquierda) -->
+      <div class="flex flex-col items-start animate-fade-in-up">
+        <!-- Etiqueta superior -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7B2638]/10 text-[#7B2638] text-xs font-bold tracking-widest uppercase mb-6 border border-[#7B2638]/20 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7B2638] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#7B2638]"></span>
+          </span>
+          Tradición Artesanal · Santiago
         </div>
 
-        <h1 class="font-serif-display text-4xl sm:text-5xl lg:text-6xl text-[#4A3028] leading-[1.08] tracking-tight font-bold mb-6 [text-wrap:balance]">
-          El sabor de la Navidad, <span class="italic text-[#7B2638]">hecho en casa.</span>
+        <!-- Título Principal con palabras destacadas -->
+        <h1 class="font-serif-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#4A3028] font-bold leading-[1.1] tracking-tight mb-6">
+          El sabor de la <br />
+          Navidad, <span class="text-[#7B2638] italic relative inline-block">
+            hecho en casa.
+            <!-- Subrayado decorativo dibujado a mano -->
+            <svg class="absolute -bottom-2 left-0 w-full h-3 text-[#C9A45C]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <path d="M0 5 Q 50 10 100 0" stroke="currentColor" stroke-width="2" fill="transparent" stroke-linecap="round"/>
+            </svg>
+          </span>
         </h1>
 
-        <p class="text-base sm:text-lg text-[#4A3028]/85 leading-relaxed mb-8 max-w-xl font-normal">
-          Descubre nuestro pan de Pascua casero, elaborado artesanalmente y con una esencia natural preparada con dedicación y mucho amor.
+        <!-- Párrafo descriptivo -->
+        <p class="text-base sm:text-lg text-[#4A3028]/80 max-w-lg leading-relaxed mb-8 font-normal">
+          Descubre nuestro pan de Pascua casero, elaborado artesanalmente con una esencia natural infusionada con dedicación y mucho amor para tu mesa navideña.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
-          <WhatsAppButton message={SITE_CONFIG.messages.hero} variant="primary" size="lg" class="w-full sm:w-auto">
+        <!-- Botones -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8">
+          <WhatsAppButton 
+            message={SITE_CONFIG.messages.hero} 
+            variant="primary" 
+            size="lg" 
+            class="w-full sm:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+          >
             Quiero encargar el mío
           </WhatsAppButton>
-
-          <a href="#galeria" class="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium rounded-lg text-[#7B2638] border border-[#7B2638]/25 hover:bg-[#7B2638]/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B2638] text-center">
+          
+          <a 
+            href="#galeria" 
+            class="group inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-medium rounded-lg text-[#4A3028] border-2 border-[#4A3028]/15 hover:border-[#4A3028]/40 bg-transparent hover:bg-[#4A3028]/5 transition-all duration-300 w-full sm:w-auto"
+          >
             Descubrir nuestros panes
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
           </a>
         </div>
 
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#4A3028]/70 pt-2 border-t border-[#C9A45C]/25">
-          <svg class="w-4 h-4 text-[#7B2638] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-          <span>Pedidos por encargo en Santiago.</span>
+        <!-- Nota de envío -->
+        <div class="flex items-center gap-2 text-sm text-[#4A3028]/60">
+          <svg class="w-4 h-4 text-[#214A35]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Pedidos por encargo en Santiago.
         </div>
       </div>
 
-      {/* Columna de Fotografía Gastronómica */}
-      <div class="lg:col-span-5 relative">
-        <div class="relative mx-auto max-w-md lg:max-w-none">
-          <div class="relative rounded-2xl overflow-hidden shadow-xl border border-[#C9A45C]/30 bg-[#FAF2E3]">
-            <img
-              src="/images/hero_pan_de_pascua.jpg"
-              alt="Pan de Pascua casero artesanal dorado con frutos secos de Dulce Esencia"
-              class="w-full h-[360px] sm:h-[420px] lg:h-[460px] object-cover hover:scale-[1.02] transition-transform duration-500 ease-out"
-              loading="eager"
-            />
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#4A3028]/85 via-[#4A3028]/40 to-transparent p-5 text-[#FFF8EC]">
-              <p class="text-xs uppercase tracking-wider text-[#C9A45C] font-medium">Receta Tradicional</p>
-              <p class="text-sm font-serif-display text-white italic">Corona dorada de nueces, almendras y esencia natural propia.</p>
+      <!-- Columna de Imagen (Derecha) -->
+      <div class="relative animate-fade-in-right lg:ml-10 mt-10 lg:mt-0">
+        <!-- Elemento decorativo detrás de la imagen -->
+        <div class="absolute -inset-4 bg-gradient-to-tr from-[#C9A45C]/30 to-transparent rounded-[2rem] blur-lg transform rotate-3 scale-105"></div>
+        
+        <!-- Contenedor de la imagen con flotación -->
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/50 animate-float">
+          <img 
+            src="/images/hero_pan_de_pascua.jpg" 
+            alt="Pan de Pascua artesanal Dulce Esencia" 
+            class="w-full h-auto object-cover aspect-[4/5] sm:aspect-square lg:aspect-[4/5] scale-105 hover:scale-110 transition-transform duration-700"
+          />
+          
+          <!-- Tarjeta flotante sobre la imagen -->
+          <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/40 transform translate-y-2 opacity-90 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#FFF8EC] flex items-center justify-center border border-[#C9A45C]/30 shadow-inner">
+                <svg class="w-5 h-5 text-[#C9A45C]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-[#7B2638] uppercase tracking-wider mb-0.5">Receta Tradicional</p>
+                <p class="text-xs text-[#4A3028]/80 font-medium">Corona dorada de nueces, almendras y esencia natural propia.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-in-right {
+    animation: fadeInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    opacity: 0; /* Inicia invisible */
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Respeto a la accesibilidad (usuarios con movimiento reducido) */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-right,
+    .animate-float,
+    .animate-ping {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
