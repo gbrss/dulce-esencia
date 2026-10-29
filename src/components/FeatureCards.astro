@@ -47,8 +47,8 @@ const features = [
           class={`feature-card group relative bg-[#FAF2E3]/50 p-8 rounded-2xl border border-[#C9A45C]/30 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl ${item.accentClass} overflow-hidden cursor-pointer`}
           style={`--glow-color: ${item.glowColor};`}
         >
-          <!-- Efecto Spotlight (Luz que sigue al mouse) -->
-          <div class="spotlight absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+          <!-- Efecto Spotlight (Luz que sigue al mouse/touch) -->
+          <div class="spotlight absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none z-0"></div>
 
           <div class="relative z-10 flex flex-col h-full">
             <!-- Ícono con efecto de flotación -->
@@ -100,37 +100,68 @@ const features = [
     transform-style: preserve-3d;
     will-change: transform;
   }
+
+  /* Feedback táctil en móviles */
+  @media (hover: none) {
+    .feature-card:active {
+      transform: scale(0.98) !important;
+      background-color: rgba(250, 242, 227, 0.9) !important;
+    }
+  }
 </style>
 
 <script>
   const cards = document.querySelectorAll('.feature-card');
 
   cards.forEach((card) => {
-    // 1. Efecto Spotlight (Luz que sigue al mouse/touch)
-    card.addEventListener('mousemove', (e) => {
+    const spotlight = card.querySelector('.spotlight');
+
+    // 1. EFECTO SPOTLIGHT (Mouse y Touch)
+    const updateSpotlight = (clientX: number, clientY: number) => {
+      if (!spotlight) return;
+      
       const rect = card.getBoundingClientRect();
-      const x = (e as MouseEvent).clientX - rect.left;
-      const y = (e as MouseEvent).clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       
       // @ts-ignore
       card.style.setProperty('--mouse-x', `${x}px`);
       // @ts-ignore
       card.style.setProperty('--mouse-y', `${y}px`);
+      
+      // Encendemos la luz
+      spotlight.classList.remove('opacity-0');
+      spotlight.classList.add('opacity-100');
+    };
+
+    // Escritorio: Mover el mouse
+    card.addEventListener('mousemove', (e) => {
+      updateSpotlight((e as MouseEvent).clientX, (e as MouseEvent).clientY);
     });
 
-    card.addEventListener('touchmove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      
-      // @ts-ignore
-      card.style.setProperty('--mouse-x', `${x}px`);
-      // @ts-ignore
-      card.style.setProperty('--mouse-y', `${y}px`);
+    // Móvil: Tocar e ir moviendo el dedo
+    card.addEventListener('touchstart', (e) => {
+      const touch = (e as TouchEvent).touches[0];
+      updateSpotlight(touch.clientX, touch.clientY);
     }, { passive: true });
 
-    // 2. Efecto Tilt 3D (Solo para Desktop para no marear en móvil)
+    card.addEventListener('touchmove', (e) => {
+      const touch = (e as TouchEvent).touches[0];
+      updateSpotlight(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    // Apagar la luz al salir o levantar el dedo
+    const hideSpotlight = () => {
+      if (spotlight) {
+        spotlight.classList.remove('opacity-100');
+        spotlight.classList.add('opacity-0');
+      }
+    };
+
+    card.addEventListener('touchend', hideSpotlight);
+    card.addEventListener('mouseleave', hideSpotlight);
+
+    // 2. EFECTO TILT 3D (Solo Escritorio)
     if (window.matchMedia('(pointer: fine)').matches) {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -140,7 +171,7 @@ const features = [
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const rotateX = ((y - centerY) / centerY) * -8; // Inclinación máxima de 8 grados
+        const rotateX = ((y - centerY) / centerY) * -8;
         const rotateY = ((x - centerX) / centerX) * 8;
 
         // @ts-ignore
