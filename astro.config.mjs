@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import cloudflare from '@astrojs/cloudflare';
 
+// https://astro.build/config
 export default defineConfig({
   site: 'https://dulceesencia.cl',
   server: {
@@ -11,11 +11,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  // Forzar explícitamente el servicio de imágenes en build
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp'
-    }
+  // Optimización de build para sitios estáticos
+  build: {
+    inlineStylesheets: 'auto', // Inyecta CSS pequeño en el HTML para evitar peticiones extra
   },
-  adapter: cloudflare({ imageService: 'compile' }),
 });
