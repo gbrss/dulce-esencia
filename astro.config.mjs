@@ -11,6 +11,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  // 👇 Forzamos la optimización en tiempo de compilación
+  // Forzar explícitamente el servicio de imágenes en build
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
   adapter: cloudflare({ imageService: 'compile' }),
 });
