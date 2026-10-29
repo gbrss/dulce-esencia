@@ -1,6 +1,10 @@
 ---
 import WhatsAppButton from './WhatsAppButton.astro';
 import { SITE_CONFIG } from '../config/site';
+
+// Dividimos el párrafo en palabras para la animación en cascada
+const paragraphText = "Descubre nuestro pan de Pascua casero, elaborado artesanalmente con una esencia natural infusionada con dedicación y mucho amor para tu mesa navideña.";
+const words = paragraphText.split(" ");
 ---
 
 <section id="inicio" class="relative min-h-[90vh] flex items-center overflow-hidden bg-[#FFF8EC]">
@@ -14,9 +18,9 @@ import { SITE_CONFIG } from '../config/site';
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
       
       <!-- Columna de Texto (Izquierda) -->
-      <div class="flex flex-col items-start animate-fade-in-up">
+      <div class="flex flex-col items-start">
         <!-- Etiqueta superior -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7B2638]/10 text-[#7B2638] text-xs font-bold tracking-widest uppercase mb-6 border border-[#7B2638]/20 shadow-sm">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7B2638]/10 text-[#7B2638] text-xs font-bold tracking-widest uppercase mb-6 border border-[#7B2638]/20 shadow-sm animate-fade-in-up">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7B2638] opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-[#7B2638]"></span>
@@ -24,52 +28,75 @@ import { SITE_CONFIG } from '../config/site';
           Tradición Artesanal · Santiago
         </div>
 
-        <!-- Título Principal con palabras destacadas -->
-        <h1 class="font-serif-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#4A3028] font-bold leading-[1.1] tracking-tight mb-6">
-          El sabor de la <br />
-          Navidad, <span class="text-[#7B2638] italic relative inline-block">
+        <!-- Título Principal con animación palabra por palabra -->
+        <h1 class="font-serif-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#4A3028] font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap gap-x-3 gap-y-2">
+          <span class="animate-word" style="animation-delay: 0.1s;">El</span>
+          <span class="animate-word" style="animation-delay: 0.2s;">sabor</span>
+          <span class="animate-word" style="animation-delay: 0.3s;">de</span>
+          <span class="animate-word" style="animation-delay: 0.4s;">la</span>
+          <br class="hidden sm:block" />
+          <span class="animate-word" style="animation-delay: 0.5s;">Navidad,</span>
+          <span class="animate-word text-[#7B2638] italic relative inline-block group cursor-default" style="animation-delay: 0.6s;">
             hecho en casa.
-            <!-- Subrayado decorativo dibujado a mano -->
-            <svg class="absolute -bottom-2 left-0 w-full h-3 text-[#C9A45C]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <!-- Subrayado dibujado a mano -->
+            <svg class="absolute -bottom-2 left-0 w-full h-3 text-[#C9A45C]/60 group-hover:text-[#C9A45C] transition-colors duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
               <path d="M0 5 Q 50 10 100 0" stroke="currentColor" stroke-width="2" fill="transparent" stroke-linecap="round"/>
             </svg>
+            <!-- Destello de brillo (Shimmer) -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer pointer-events-none mix-blend-overlay"></div>
           </span>
         </h1>
 
-        <!-- Párrafo descriptivo -->
-        <p class="text-base sm:text-lg text-[#4A3028]/80 max-w-lg leading-relaxed mb-8 font-normal">
-          Descubre nuestro pan de Pascua casero, elaborado artesanalmente con una esencia natural infusionada con dedicación y mucho amor para tu mesa navideña.
+        <!-- Párrafo con animación en cascada (Stagger) letra por letra/palabra por palabra -->
+        <p class="text-base sm:text-lg text-[#4A3028]/80 max-w-lg leading-relaxed mb-8 font-normal flex flex-wrap gap-x-1.5 gap-y-1">
+          {words.map((word, index) => (
+            <span 
+              class="animate-typeword" 
+              style={`animation-delay: ${0.8 + (index * 0.05)}s;`}
+            >
+              {word}
+            </span>
+          ))}
         </p>
 
         <!-- Botones -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8">
-          <WhatsAppButton 
-            message={SITE_CONFIG.messages.hero} 
-            variant="primary" 
-            size="lg" 
-            class="w-full sm:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-          >
-            Quiero encargar el mío
-          </WhatsAppButton>
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8 animate-fade-in-up" style="animation-delay: 2.5s;">
           
+          <!-- 1. BOTÓN WHATSAPP (Animación aplicada al DIV contenedor) -->
+          <div class="w-full sm:w-auto animate-breathe-slow">
+            <WhatsAppButton 
+              message={SITE_CONFIG.messages.hero} 
+              variant="primary" 
+              size="lg" 
+              class="w-full sm:w-auto shadow-lg transition-colors duration-300"
+            >
+              Quiero encargar el mío
+            </WhatsAppButton>
+          </div>
+          
+          <!-- 2. BOTÓN DESCUBRIR (Respiración y cambio de fondo sutil) -->
           <a 
             href="#galeria" 
-            class="group inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-medium rounded-lg text-[#4A3028] border-2 border-[#4A3028]/15 hover:border-[#4A3028]/40 bg-transparent hover:bg-[#4A3028]/5 transition-all duration-300 w-full sm:w-auto"
+            class="group relative inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-medium rounded-lg text-[#4A3028] overflow-hidden w-full sm:w-auto border-2 border-[#4A3028]/15 hover:border-[#C9A45C] animate-breathe-subtle transition-colors duration-300"
           >
-            Descubrir nuestros panes
-            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            <span class="relative z-10 group-hover:text-[#7B2638] transition-colors duration-300 font-semibold">
+              Descubrir nuestros panes
+            </span>
+            <svg class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-y-1 group-hover:text-[#7B2638]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
           </a>
         </div>
 
         <!-- Nota de envío -->
-        <div class="flex items-center gap-2 text-sm text-[#4A3028]/60">
+        <div class="flex items-center gap-2 text-sm text-[#4A3028]/60 animate-fade-in-up" style="animation-delay: 2.7s;">
           <svg class="w-4 h-4 text-[#214A35]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
           Pedidos por encargo en Santiago.
         </div>
       </div>
 
       <!-- Columna de Imagen (Derecha) -->
-      <div class="relative animate-fade-in-right lg:ml-10 mt-10 lg:mt-0">
+      <div class="relative animate-fade-in-right lg:ml-10 mt-10 lg:mt-0" style="animation-delay: 0.4s;">
         <!-- Elemento decorativo detrás de la imagen -->
         <div class="absolute -inset-4 bg-gradient-to-tr from-[#C9A45C]/30 to-transparent rounded-[2rem] blur-lg transform rotate-3 scale-105"></div>
         
@@ -101,56 +128,108 @@ import { SITE_CONFIG } from '../config/site';
 </section>
 
 <style>
-  /* Animaciones */
+  /* --- ANIMACIONES DE TEXTO --- */
+  @keyframes revealWord {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .animate-word {
+    display: inline-block;
+    opacity: 0;
+    animation: revealWord 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes revealTypeword {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-typeword {
+    display: inline-block;
+    opacity: 0;
+    animation: revealTypeword 0.4s ease-out forwards;
+  }
+
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    animation: shimmer 3s infinite;
+    animation-delay: 2s;
+  }
+
+  /* --- ANIMACIONES DE RESPIRACIÓN (LENTAS Y ORGÁNICAS) --- */
+  
+  /* 1. Respiración notoria para el contenedor del botón de WhatsApp */
+  @keyframes breatheSlow {
+    0% { 
+      transform: scale(1); 
+      filter: drop-shadow(0 10px 15px rgba(33, 74, 53, 0.3));
+    }
+    50% { 
+      transform: scale(1.08); /* Crece un 8% */
+      filter: drop-shadow(0 20px 25px rgba(33, 74, 53, 0.5));
+    }
+    100% { 
+      transform: scale(1); 
+      filter: drop-shadow(0 10px 15px rgba(33, 74, 53, 0.3));
+    }
+  }
+  
+  .animate-breathe-slow {
+    animation: breatheSlow 3s ease-in-out infinite;
+  }
+
+  /* 2. Respiración y cambio de fondo para el botón de Descubrir */
+  @keyframes breatheSubtle {
+    0%, 100% { 
+      transform: scale(1); 
+      background-color: transparent;
+    }
+    50% { 
+      transform: scale(1.04); /* Crece un 4% */
+      background-color: rgba(201, 164, 92, 0.1); /* Fondo dorado muy suave */
+    }
+  }
+  
+  .animate-breathe-subtle {
+    animation: breatheSubtle 4s ease-in-out infinite;
+  }
+
+  /* --- ANIMACIONES GENERALES --- */
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
   }
-
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
   }
 
   .animate-fade-in-up {
+    opacity: 0;
     animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-
   .animate-fade-in-right {
-    animation: fadeInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-    opacity: 0; /* Inicia invisible */
+    opacity: 0;
+    animation: fadeInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
-  /* Respeto a la accesibilidad (usuarios con movimiento reducido) */
+  /* Accesibilidad */
   @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in-up,
-    .animate-fade-in-right,
-    .animate-float,
-    .animate-ping {
+    .animate-word, .animate-typeword, .animate-fade-in-up, .animate-fade-in-right, 
+    .animate-float, .animate-ping, .animate-shimmer, 
+    .animate-breathe-slow, .animate-breathe-subtle {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
+      filter: none !important;
     }
   }
 </style>

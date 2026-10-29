@@ -3,53 +3,154 @@ const features = [
   {
     title: 'Elaboración casera',
     description: 'Cada pan de Pascua se prepara en tandas pequeñas, con la dedicación y el cuidado que caracterizan las recetas de hogar.',
-    accent: 'border-[#7B2638]/20 bg-[#FAF2E3]/80',
-    iconColor: 'text-[#7B2638]',
+    accentClass: 'hover:border-[#7B2638]/40',
+    iconBg: 'bg-[#7B2638]/10 text-[#7B2638]',
+    glowColor: 'rgba(123, 38, 56, 0.15)', // Borgoña
+    iconPath: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
   },
   {
     title: 'Esencia natural preparada artesanalmente',
     description: 'Infusionamos y preparamos nuestra propia esencia de especias y frutas, logrando un aroma navideño auténtico sin aromatizantes sintéticos.',
-    accent: 'border-[#214A35]/20 bg-[#FAF2E3]/80',
-    iconColor: 'text-[#214A35]',
+    accentClass: 'hover:border-[#214A35]/40',
+    iconBg: 'bg-[#214A35]/10 text-[#214A35]',
+    glowColor: 'rgba(33, 74, 53, 0.15)', // Verde pino
+    iconPath: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z'
   },
   {
     title: 'Pedidos directos y atención personalizada',
     description: 'Coordinas tu encargo directamente con quien elabora los panes por WhatsApp, resolviendo dudas y coordinando entrega de forma cercana.',
-    accent: 'border-[#C9A45C]/30 bg-[#FAF2E3]/80',
-    iconColor: 'text-[#C9A45C]',
+    accentClass: 'hover:border-[#C9A45C]/60',
+    iconBg: 'bg-[#C9A45C]/15 text-[#B59048]',
+    glowColor: 'rgba(201, 164, 92, 0.15)', // Dorado
+    iconPath: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'
   },
 ];
 ---
 
-<section class="py-14 md:py-20 bg-[#FAF2E3]/60 border-y border-[#C9A45C]/20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="text-xs font-semibold tracking-wider uppercase text-[#7B2638]">
+<section class="py-16 md:py-24 bg-[#FFF8EC] border-y border-[#C9A45C]/20 relative overflow-hidden">
+  <!-- Textura de fondo sutil -->
+  <div class="absolute inset-0 bg-[radial-gradient(#C9A45C_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-2xl mx-auto mb-16 animate-fade-in-up">
+      <span class="inline-block px-3 py-1 rounded-full bg-[#FAF2E3] text-xs font-bold tracking-widest uppercase text-[#7B2638] mb-3 border border-[#C9A45C]/20">
         Diferenciadores
       </span>
-      <h2 class="font-serif-display text-3xl sm:text-4xl text-[#4A3028] font-bold mt-2">
+      <h2 class="font-serif-display text-3xl sm:text-4xl lg:text-5xl text-[#4A3028] font-bold [text-wrap:balance]">
         La diferencia de lo auténtico
       </h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-      {features.map((item) => (
-        <div class={`p-7 rounded-xl border ${item.accent} transition-all duration-200 hover:shadow-md flex flex-col justify-between`}>
-          <div>
-            <div class={`w-12 h-12 rounded-lg bg-[#FFF8EC] border border-[#C9A45C]/25 flex items-center justify-center mb-5 ${item.iconColor}`}>
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      {features.map((item, idx) => (
+        <div 
+          class={`feature-card group relative bg-[#FAF2E3]/50 p-8 rounded-2xl border border-[#C9A45C]/30 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl ${item.accentClass} overflow-hidden cursor-pointer`}
+          style={`--glow-color: ${item.glowColor};`}
+        >
+          <!-- Efecto Spotlight (Luz que sigue al mouse) -->
+          <div class="spotlight absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+
+          <div class="relative z-10 flex flex-col h-full">
+            <!-- Ícono con efecto de flotación -->
+            <div class={`w-14 h-14 rounded-2xl ${item.iconBg} flex items-center justify-center mb-6 shadow-sm border border-black/5 transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3`}>
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.iconPath}></path>
               </svg>
             </div>
-            <h3 class="font-serif-display text-xl sm:text-2xl font-bold text-[#4A3028] mb-3">
+            
+            <!-- Contenido -->
+            <h3 class="font-serif-display text-xl sm:text-2xl font-bold text-[#4A3028] mb-3 leading-tight group-hover:text-[#7B2638] transition-colors duration-300">
               {item.title}
             </h3>
-            <p class="text-sm text-[#4A3028]/80 leading-relaxed font-normal">
+            
+            <p class="text-sm text-[#4A3028]/80 leading-relaxed font-normal flex-grow">
               {item.description}
             </p>
+            
+            <!-- Línea decorativa inferior que crece al hacer hover -->
+            <div class="mt-6 w-12 h-1 bg-[#C9A45C]/30 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#C9A45C]"></div>
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Animación de entrada */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Lógica del Spotlight */
+  .spotlight {
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      var(--glow-color),
+      transparent 40%
+    );
+  }
+
+  /* Lógica del Tilt 3D (se aplica a través de JS) */
+  .feature-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll('.feature-card');
+
+  cards.forEach((card) => {
+    // 1. Efecto Spotlight (Luz que sigue al mouse/touch)
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e as MouseEvent).clientX - rect.left;
+      const y = (e as MouseEvent).clientY - rect.top;
+      
+      // @ts-ignore
+      card.style.setProperty('--mouse-x', `${x}px`);
+      // @ts-ignore
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    card.addEventListener('touchmove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      
+      // @ts-ignore
+      card.style.setProperty('--mouse-x', `${x}px`);
+      // @ts-ignore
+      card.style.setProperty('--mouse-y', `${y}px`);
+    }, { passive: true });
+
+    // 2. Efecto Tilt 3D (Solo para Desktop para no marear en móvil)
+    if (window.matchMedia('(pointer: fine)').matches) {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e as MouseEvent).clientX - rect.left;
+        const y = (e as MouseEvent).clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -8; // Inclinación máxima de 8 grados
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        // @ts-ignore
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        // @ts-ignore
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)`;
+      });
+    }
+  });
+</script>
