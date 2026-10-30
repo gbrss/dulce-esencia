@@ -3,13 +3,11 @@ import WhatsAppButton from './WhatsAppButton.astro';
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<header class="sticky top-0 z-40 transition-all duration-200 bg-[#FFF8EC]/95 backdrop-blur-md border-b border-[#C9A45C]/20 py-4">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="sticky top-0 z-40 transition-all duration-200 bg-[#FFF8EC]/95 backdrop-blur-md border-b border-[#C9A45C]/20 py-2">  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between gap-8">
       {/* Zona 1: Logo */}
       <a href="#inicio" class="flex items-center gap-3 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B2638] rounded-md" aria-label="Dulce Esencia - Ir al inicio">
-        <img src="/logo.svg" alt="Logotipo Dulce Esencia Pan de Pascua Casero" class="h-10 sm:h-11 w-auto" width="280" height="64" />
-      </a>
+        <img src="/logo.svg" alt="Logotipo Dulce Esencia Pan de Pascua Casero" class="h-14 sm:h-16 w-auto object-contain" />      </a>
 
       {/* Zona 2: Enlaces */}
       <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-8 text-sm font-medium text-[#4A3028]">
@@ -19,7 +17,7 @@ import { SITE_CONFIG } from '../config/site';
           </a>
         ))}
       </nav>
-
+ 
       {/* Zona 3: CTA & Mobile trigger */}
       <div class="flex items-center gap-3 shrink-0">
         <div class="hidden sm:block">
